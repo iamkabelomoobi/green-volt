@@ -21,13 +21,6 @@ const LoginScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  const handleLogin = () => {
-    if (!email || !password) {
-      alert("Please enter both email and password.");
-      return;
-    }
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -81,7 +74,12 @@ const LoginScreen = () => {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+          <TouchableOpacity
+            style={styles.loginButton}
+            onPress={() => {
+              router.push("/(dashboard)/DashboardScreen");
+            }}
+          >
             <Text style={styles.loginButtonText}>Login</Text>
           </TouchableOpacity>
 
@@ -104,9 +102,7 @@ const LoginScreen = () => {
 
           <View style={styles.bottomRow}>
             <Text style={styles.bottomText}>Don&apos;t have an account?</Text>
-            <TouchableOpacity
-              onPress={() => router.push("/RegisterScreen")}
-            >
+            <TouchableOpacity onPress={() => router.push("/RegisterScreen")}>
               <Text style={styles.bottomLink}> Sign Up</Text>
             </TouchableOpacity>
           </View>
