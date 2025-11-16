@@ -1,34 +1,32 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
-import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
-import { StatusBar } from "react-native";
-import "react-native-reanimated";
+import React from "react";
+import { StatusBar, StyleSheet, View } from "react-native";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
-  });
-
-  if (!loaded) {
-    return null;
-  }
-
+const RootLayout = () => {
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+    <View style={styles.container}>
       <StatusBar
-        barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
+        hidden={false}
+        translucent={true}
+        backgroundColor="transparent"
+        barStyle="dark-content"
       />
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="onboarding" />
-        <Stack.Screen name="+not-found" />
+
+      <Stack
+        initialRouteName="onboarding"
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name="(auth)" />
       </Stack>
-    </ThemeProvider>
+    </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#000",
+  },
+});
+
+export default RootLayout;

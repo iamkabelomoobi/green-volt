@@ -1,28 +1,30 @@
 import React from "react";
-import { SafeAreaView, View, Text, Animated, StyleSheet } from "react-native";
+import { View, Text, Animated, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { usePulseAnimation } from "../hooks/usePulseAnimation";
 import { BottomCurve } from "../components/ui/BottomCurve";
 
 export default function OnboardingScreen() {
   const { scale, opacity } = usePulseAnimation();
-  const handleGetStarted = () => {
-    // TODO: navigate to LoginScreen
-  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={[styles.center]}>
+      <View style={styles.center}>
         <Text style={styles.title}>NEVER LOSE POWER!</Text>
+
         <View style={styles.pulseRow}>
           <View style={styles.line} />
+
           <Animated.Image
             source={require("../assets/images/charging.png")}
             style={[styles.icon, { transform: [{ scale }], opacity }]}
           />
+
           <View style={styles.line} />
         </View>
       </View>
-      <BottomCurve onPress={handleGetStarted} />
+
+      <BottomCurve />
     </SafeAreaView>
   );
 }

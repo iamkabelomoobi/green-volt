@@ -6,16 +6,23 @@ import {
   Dimensions,
   StyleSheet,
 } from "react-native";
+import { useRouter } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
-export const BottomCurve = ({ onPress }: { onPress: () => void }) => {
+export const BottomCurve: React.FC = () => {
+  const router = useRouter();
+
+  const handlePress = () => {
+    router.replace("/(auth)/LoginScreen");
+  };
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.curve} />
       <TouchableOpacity
         style={styles.button}
-        onPress={onPress}
+        onPress={handlePress}
         activeOpacity={0.8}
       >
         <Text style={styles.buttonText}>GET STARTED</Text>
